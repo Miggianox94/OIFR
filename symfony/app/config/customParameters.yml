@@ -1,0 +1,15 @@
+parameters:
+    homepage:
+      mainTitle: Online Image Filter Recognition
+      mainDescription: A free and open source image recognition filter
+      buttons:
+        getStartedBtn: Start Now!
+
+    recognizepage:
+      mainTitle: Recognize and Filter your Images
+      zip_upload_directory: '%kernel.project_dir%\web\uploads\zipImages'
+      tmp_unzip_directory: '%kernel.project_dir%\web\uploads\tmpUnzipImages'
+      showResultBtn: Show Last Results
+
+    tests:
+      assetDir: '%kernel.project_dir%\tests\'

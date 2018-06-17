@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <!-- Header -->
+    <header class="masthead d-flex">
+        <div class="container text-center my-auto">
+            <h1 class="mb-1">{{ homepage.mainTitle }}</h1>
+            <h3 class="mb-5">
+                <em>{{ homepage.mainDescription }}</em>
+            </h3>
+            <a class="btn btn-primary btn-xl bowlbyFont" href="{{ path('recognizePage') }}">{{ homepage.buttons.getStartedBtn }}</a>
+        </div>
+        <div class="overlay"></div>
+    </header>
+
+{% endblock %}
+
+
+{% block footer %}
+    {#This permits to clear parent footer#}
+{% endblock %}
+
+

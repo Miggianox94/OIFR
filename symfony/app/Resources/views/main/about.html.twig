@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/aboutPage/wow.js') }}"></script>
+    <script src="{{ asset('js/aboutPage/custom.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aboutPage/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aboutPage/style.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="container wow fadeInUp delay-03s">
+
+
+            <section id="about" class="section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <div class="about-title">
+                                <h2 class="bowlbyFont">About OIFR</h2>
+                                <p>Online Image Filter Recognition is a free and open source tool that you can use to
+                                    filter nudity content from your set of images.
+                            </div>
+                            <div class="row">
+                                <div class="descriptionSection col-md-3 col-sm-6 col-xs-12 wow fadeInUp delay-01s">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-centered col-xs-6 wow fadeInUp delay-03s">
+                                    <a class="linkNoDecorated" href="https://github.com/Miggianox94/OIFR">
+                                        <div class="img">
+                                            <i class="fab fa-github fa-10x"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+        {% block footer %}
+            {#This permits to clear parent footer#}
+        {% endblock %}
+
