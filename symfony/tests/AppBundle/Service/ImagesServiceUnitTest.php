@@ -25,12 +25,14 @@ class ImagesServiceUnitTest extends KernelTestCase
     public function testConstruct()
     {
         $container = static::$kernel->getContainer();
+        $logger = $container->get('monolog.logger.appChannel');
+
 
         $class = new ReflectionClass("AppBundle\Service\ImagesService");
         $property = $class->getProperty("container");
         $property->setAccessible(true);
 
-        $imageService = new ImagesService($container);
+        $imageService = new ImagesService($container,$logger);
 
         $this->assertEquals(
             $container,

@@ -31,8 +31,8 @@ services:
         volumes:
             - ./logs/nginx/:/var/log/nginx
         environment:
-            SYMFONY_ENV: dev
-            SYMFONY_DEBUG: 1
+            SYMFONY_ENV: ${SYMFONY_ENV}
+            SYMFONY_DEBUG: ${SYMFONY_DEBUG}
     elk:
         image: willdurand/elk
         ports:

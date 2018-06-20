@@ -50,7 +50,13 @@
       <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-php70" />
       <path value="$PROJECT_DIR$/symfony/vendor/bin/.phpunit" />
       <path value="$PROJECT_DIR$/symfony/vendor/sensiolabs/security-checker" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/phpunit-bridge" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings load_method="PHPUNIT_PHAR" configuration_file_path="$PROJECT_DIR$/symfony/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/symfony/composer.json" phpunit_phar_path="$PROJECT_DIR$/symfony/vendor/bin/.phpunit/phpunit-6.5/phpunit" use_configuration_file="true" />
+    </phpunit_settings>
+  </component>
 </project>
