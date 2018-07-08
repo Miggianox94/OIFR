@@ -1,0 +1,52 @@
+version: '2'
+
+services:
+    db:
+        image: mariadb
+        volumes:
+            - dbfiles:/var/lib/mysql
+        env_file: 
+            env-prod
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+          - 8082:8080
+    php:
+        image: salvatorecoluccia94/oifr_php:latest
+        env_file: 
+            env-prod
+        environment:
+            SYMFONY_ENV: ${SYMFONY_ENV}
+            SYMFONY_DEBUG: ${SYMFONY_DEBUG}
+            XDEBUG_CONFIG: remote_host=192.168.42.49
+    nginx:
+        image: salvatorecoluccia94/oifr_nginx
+        env_file: 
+            env-prod
+        ports:
+            - 80:80
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+        environment:
+            SYMFONY_ENV: ${SYMFONY_ENV}
+            SYMFONY_DEBUG: ${SYMFONY_DEBUG}
+    elk:
+        image: willdurand/elk
+        ports:
+            - 81:80
+        volumes:
+            - elklogs:/etc/logstash
+            - elkpatterns:/opt/logstash/patterns
+        volumes_from:
+            - php
+            - nginx
+volumes:
+  dbfiles:
+  elklogs:
+  elkpatterns:
