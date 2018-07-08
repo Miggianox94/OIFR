@@ -1,0 +1,13 @@
+## MySQL
+MYSQL_ROOT_PASSWORD= root
+MYSQL_DATABASE= OIFRDB
+MYSQL_USER= user
+MYSQL_PASSWORD= userpass
+
+## Timezone
+TIMEZONE= Europe/Paris
+
+## Symfony environment
+SYMFONY_ENV= dev
+#If 0, debug mode is disabled
+SYMFONY_DEBUG= 1

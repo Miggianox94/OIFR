@@ -2,17 +2,25 @@ version: '2'
 
 services:
     db:
-        image: mysql
+        image: mariadb
         volumes:
-            - "./.data/db:/var/lib/mysql"
+            - C:/dockersVolumes/OIFR/data/mariadb:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+          - 8081:8080
+
     php:
+        image: salvatorecoluccia94/oifr_php
         build:
-            context: php7-fpm
+            context: .
+            dockerfile: php7-fpm/Dockerfile
             args:
                 TIMEZONE: ${TIMEZONE}
         volumes:
@@ -22,7 +30,9 @@ services:
         environment:
             SYMFONY_ENV: ${SYMFONY_ENV}
             SYMFONY_DEBUG: ${SYMFONY_DEBUG}
+            XDEBUG_CONFIG: remote_host=192.168.42.49
     nginx:
+        image: salvatorecoluccia94/oifr_nginx
         build: nginx
         ports:
             - 80:80

@@ -26,8 +26,19 @@ RUN docker-php-ext-install pdo pdo_mysql
 
 
 # install xdebug
-RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug
+##RUN pecl install xdebug
+##RUN docker-php-ext-enable xdebug
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+RUN echo "xdebug.remote_log=\"/tmp/xdebug.log\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_handler=\"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_host=\"host.docker.internal\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -35,13 +46,13 @@ RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebu
 #RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 #RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 #RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_host=192.168.42.167" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_handler=\"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN echo "xdebug.remote_host=192.168.42.167" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+##RUN echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+##RUN echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+##RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+##RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+##RUN echo "xdebug.remote_handler=\"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+##RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 
 RUN echo 'alias sf="php app/console"' >> ~/.bashrc
@@ -49,5 +60,21 @@ RUN echo 'alias sf3="php bin/console"' >> ~/.bashrc
 
 RUN echo "Changing user to uid 1000 and www-data"
 RUN usermod -u 1000 www-data
+
+RUN echo "copying source code...."
+ADD symfony /var/www/symfony/
+RUN echo "Showing situation of symfony folder after COPY command.."
+RUN ls -l /var/www/symfony/
+#RUN cp -r /var/www/symfony/web/css /var/www/symfony/
+#RUN cp -r /var/www/symfony/web/fonts /var/www/symfony/
+#RUN cp -r /var/www/symfony/web/img /var/www/symfony/
+#RUN cp -r /var/www/symfony/web/js /var/www/symfony/
+#RUN cp -r /var/www/symfony/web/uploads /var/www/symfony/
+RUN echo "Setting permission for folders symfony.."
+RUN chown -R www-data:www-data /var/www/symfony
+RUN chmod -R 777 /var/www/symfony
+RUN ls -ld /var/www/symfony/
+RUN ls -l /var/www/symfony/
+RUN echo "Source code correctly copied"
 
 WORKDIR /var/www/symfony
