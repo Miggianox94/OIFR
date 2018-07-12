@@ -7,8 +7,8 @@ parameters:
 
     recognizepage:
       mainTitle: Recognize and Filter your Images
-      zip_upload_directory: '%kernel.project_dir%\web\uploads\zipImages'
-      tmp_unzip_directory: '%kernel.project_dir%\web\uploads\tmpUnzipImages'
+      zip_upload_directory: '%kernel.project_dir%/web/uploads/zipImages'
+      tmp_unzip_directory: '%kernel.project_dir%/web/uploads/tmpUnzipImages'
       showResultBtn: Show Last Results
 
     tests:

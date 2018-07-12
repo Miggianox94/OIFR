@@ -4,7 +4,7 @@ services:
     db:
         image: mariadb
         volumes:
-            - C:/dockersVolumes/OIFR/data/mariadb:/var/lib/mysql
+            - ./data/mariadb:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -25,21 +25,24 @@ services:
                 TIMEZONE: ${TIMEZONE}
         volumes:
             - ./symfony:/var/www/symfony
-            - ./logs/symfony:/var/www/symfony/app/logs
-            - ./symfony/var/sessions/dev:/var/www/symfony/app/sessions
+            - ./logs/symfony:/var/www/symfony/var/logs
+            - ./symfony/var/sessions/dev:/var/www/symfony/var/sessions
         environment:
             SYMFONY_ENV: ${SYMFONY_ENV}
             SYMFONY_DEBUG: ${SYMFONY_DEBUG}
-            XDEBUG_CONFIG: remote_host=192.168.42.49
+            XDEBUG_CONFIG: remote_host=192.168.42.15
     nginx:
         image: salvatorecoluccia94/oifr_nginx
-        build: nginx
+        build:
+            context: .
+            dockerfile: nginx/Dockerfile
         ports:
             - 80:80
         volumes_from:
             - php
         volumes:
             - ./logs/nginx/:/var/log/nginx
+            - ./tmp/nginx/:/var/tmp
         environment:
             SYMFONY_ENV: ${SYMFONY_ENV}
             SYMFONY_DEBUG: ${SYMFONY_DEBUG}

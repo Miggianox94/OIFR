@@ -6,8 +6,8 @@ RUN apt-get update && apt-get install -y \
     nginx
 
 RUN usermod -u 1000 www-data
-COPY nginx.conf /etc/nginx/
-COPY symfony.conf /etc/nginx/sites-available/
+COPY nginx/nginx.conf /etc/nginx/
+COPY nginx/symfony.conf /etc/nginx/sites-available/
 
 RUN echo "Showing situation of /etc/nginx/.."
 RUN ls -l /etc/nginx/
@@ -17,6 +17,19 @@ RUN rm /etc/nginx/sites-enabled/default
 
 RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
 
+RUN echo "Changing user to uid 1000 and www-data"
+RUN usermod -u 1000 www-data
+
+RUN echo "copying source code...."
+ADD symfony /var/www/symfony/
+RUN echo "Showing situation of symfony folder after COPY command.."
+RUN ls -l /var/www/symfony/
+RUN echo "Setting permission for folders symfony.."
+RUN chown -R www-data:www-data /var/www/symfony
+RUN chmod -R 777 /var/www/symfony
+RUN ls -ld /var/www/symfony/
+RUN ls -l /var/www/symfony/
+RUN echo "Source code correctly copied"
 
 WORKDIR /var/www/symfony
 

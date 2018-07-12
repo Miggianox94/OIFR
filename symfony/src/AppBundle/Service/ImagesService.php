@@ -109,7 +109,7 @@ class ImagesService
 
         }catch (
         Throwable $ex){
-            $this->logger->error("ImageService-->processUploadRequest: Exception.\n$ex->getMessage()");
+            $this->logger->error("ImageService-->processUploadRequest: Exception.\n{$ex->getMessage()}");
             $status = array('status' => 'error','message' => $ex->getMessage());
             return new JsonResponse($status);
         }
@@ -132,7 +132,7 @@ class ImagesService
         foreach ($fileList as $image ){
             //TODO: validare $image con un validatore per vedere se è un'immagine
             $modelResult = $this->clarifai->getModelRepository()->predictPath(
-                $this->uploadTmpDirectory . '\\' . $image,
+                $this->uploadTmpDirectory . '/' . $image,
                 \DarrynTen\Clarifai\Repository\ModelRepository::NSFW
             );
             $nsfwValue = 0.0;
@@ -148,11 +148,11 @@ class ImagesService
                 $sfwValue = $modelResult['outputs'][0]['data']['concepts'][0]['value'];
             }
 
-            $imageResized = new Imagick($this->uploadTmpDirectory . '\\' . $image);
+            $imageResized = new Imagick($this->uploadTmpDirectory . '/' . $image);
             //$imageResized->resizeImage(75, 75, Imagick::FILTER_POINT, 1/*, true*/);
             //$imageResized->thumbnailImage(75,75);
 
-            //$imagedata = file_get_contents($this->uploadTmpDirectory . '\\' . $image);
+            //$imagedata = file_get_contents($this->uploadTmpDirectory . '/' . $image);
             $base64Image = base64_encode($imageResized->getimageblob());
             $imageResized->clear();
 
@@ -199,7 +199,7 @@ class ImagesService
                 if ( substr( $entry, -1 ) == '/' ) continue; // skip directories
 
                 $fp = $zip->getStream( $entry );
-                $ofp = fopen( $dest.'\\'.basename($entry), 'w' );
+                $ofp = fopen( $dest.'/'.basename($entry), 'w' );
 
                 if ( ! $fp )
                     throw new Exception('Unable to extract the file.');

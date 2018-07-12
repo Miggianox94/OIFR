@@ -36,6 +36,7 @@ $(window).on('load', function () {
             url: '/recognizeUpload',
             type: uploadForm.attr('method'),
             data: ajaxData,
+            //data: null,
             //dataType: 'json',
             cache: false,
             contentType: false,
