@@ -2,14 +2,18 @@ version: '2'
 
 services:
     db:
-        image: mariadb
-        volumes:
-            - ./data/mariadb:/var/lib/mysql
+        image: bitnami/mariadb
+#        volumes:
+#            - ./data:/bitnami
+#            - ./logs/mysql:/opt/bitnami/mariadb/logs/
+#            - ./my_custom.cnf:/bitnami/mariadb/conf/my_custom.cnf:ro
         environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+          - MARIADB_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+          - MARIADB_DATABASE=${MYSQL_DATABASE}
+          - MARIADB_USER=${MYSQL_USER}
+          - MARIADB_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+          - '3306:3306'
     adminer:
         image: adminer
         restart: always
