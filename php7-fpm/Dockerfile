@@ -88,4 +88,7 @@ RUN ls -ld /var/www/symfony/
 RUN ls -l /var/www/symfony/
 RUN echo "Source code correctly copied"
 
+##RUN echo "Fix for nginx to communicate"
+##RUN sed -i 's/127.0.0.1:9000/0.0.0.0:9000/g' /usr/local/etc/php-fpm.d/www.conf
+
 WORKDIR /var/www/symfony

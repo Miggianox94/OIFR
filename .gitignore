@@ -53,3 +53,7 @@ atlassian-ide-plugin.xml
 .data
 logs
 .env
+
+#DEPLOY SCRIPT
+deployPROD.sh
+hooks.json
