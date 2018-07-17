@@ -86,7 +86,6 @@ class ImagesController extends Controller
     public function recognizeUploadPageAction(Request $request, ImagesService $imagesService)
     {
         $this->logger->info("recognizeUploadPageAction matched");
-
         return $imagesService->processUploadRequest($request,$this->get('validator'));
 
 
