@@ -74,8 +74,7 @@ RUN usermod -u 1000 www-data
 
 RUN echo "copying source code...."
 ADD symfony /var/www/symfony/
-RUN cd /var/www/symfony/
-RUN composer install
+RUN cd /var/www/symfony/ && composer install
 RUN echo "Showing situation of symfony folder after COPY command.."
 RUN ls -l /var/www/symfony/
 #RUN cp -r /var/www/symfony/web/css /var/www/symfony/
