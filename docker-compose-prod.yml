@@ -28,6 +28,7 @@ services:
         volumes:
             - ./logs/symfony:/var/www/symfony/var/logs
             - ./symfony/var/sessions/dev:/var/www/symfony/var/sessions
+            - ./symfony/web/uploads:/var/www/symfony/web/uploads
         environment:
             SYMFONY_ENV: ${SYMFONY_ENV}
             SYMFONY_DEBUG: ${SYMFONY_DEBUG}

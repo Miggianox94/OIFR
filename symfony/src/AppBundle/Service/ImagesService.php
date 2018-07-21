@@ -199,10 +199,10 @@ class ImagesService
                 if ( substr( $entry, -1 ) == '/' ) continue; // skip directories
 
                 $fp = $zip->getStream( $entry );
-                $ofp = fopen( $dest.'/'.basename($entry), 'w' );
-
-                if ( ! $fp )
+                if ( ! $fp ){
                     throw new Exception('Unable to extract the file.');
+                }
+                $ofp = fopen( $dest.'/'.basename($entry), 'w' );
 
                 while ( ! feof( $fp ) )
                     fwrite( $ofp, fread($fp, 8192) );

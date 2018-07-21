@@ -74,6 +74,8 @@ RUN usermod -u 1000 www-data
 
 RUN echo "copying source code...."
 ADD symfony /var/www/symfony/
+RUN mkdir -p -m 777 /var/www/symfony/web/uploads/tmpUnzipImages
+RUN mkdir -p -m 777 /var/www/symfony/web/uploads/zipImages
 RUN cd /var/www/symfony/ && composer install
 RUN echo "Showing situation of symfony folder after COPY command.."
 RUN ls -l /var/www/symfony/
