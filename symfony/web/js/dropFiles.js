@@ -160,14 +160,6 @@ $(window).on('load', function () {
                 "        <img class='galleryImage "+dangerClass+"' height=\"75\" width=\"75\" src='data:image/png;base64,"+results[i].Image+"' alt=\""+results[i].filename+"\">\n" +
                 "</a>"
             linkDiv.append(imageData);
-            linkDiv.append(imageData);
-            linkDiv.append(imageData);
-            linkDiv.append(imageData);
-            linkDiv.append(imageData);
-            linkDiv.append(imageData);
-            linkDiv.append(imageData);
-            linkDiv.append(imageData);
-            linkDiv.append(imageData);
 
             $('[data-toggle="tooltip"]').tooltip();
         }
