@@ -109,7 +109,7 @@ class ImagesService
 
         }catch (
         Throwable $ex){
-            $this->logger->error("ImageService-->processUploadRequest: Exception.\n{$ex->getMessage()}");
+            $this->logger->error("ImageService-->processUploadRequest: Exception.\n{$ex->getTraceAsString()}");
             $status = array('status' => 'error','message' => $ex->getMessage());
             return new JsonResponse($status);
         }
