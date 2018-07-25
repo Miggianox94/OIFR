@@ -88,4 +88,4 @@ fabric.properties
 .idea/sonarlint
 
 #PRODUCTION_DATA
-/app/prod/*
+/app/config/prod/*
