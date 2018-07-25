@@ -1,0 +1,20 @@
+imports:
+    - { resource: ../common/config.yml }
+    - { resource: ../common/security.yml }
+    - { resource: ../common/services.yml }
+    - { resource: ../common/customParameters.yml }
+    - { resource: parameters.yml }
+
+framework:
+    router:
+        resource: '%kernel.project_dir%/app/config/%kernel.environment%/routing_%kernel.environment%.yml'
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+
+#swiftmailer:
+#    delivery_addresses: ['me@example.com']

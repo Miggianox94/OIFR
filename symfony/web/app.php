@@ -21,7 +21,7 @@ if ($debug) {
 
 if ('prod' === $env) {
     header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+    //exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
     $kernel = new AppKernel('prod', $debug);
 }
 else{

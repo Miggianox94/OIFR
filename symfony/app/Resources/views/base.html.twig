@@ -18,7 +18,7 @@
                 <i class="fa fa-bars"></i>
             </a>
             <nav id="sidebar-wrapper">
-                {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
+                {{ knp_menu_render('main') }}
             </nav>
         {% endblock %}
         {% for label, flashes in app.session.flashbag.all %}

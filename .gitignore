@@ -49,6 +49,7 @@ atlassian-ide-plugin.xml
 # Sonarlint plugin
 .idea/sonarlint
 
+
 #OIFR specific docker
 .data
 logs

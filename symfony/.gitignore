@@ -86,3 +86,6 @@ fabric.properties
 
 # Sonarlint plugin
 .idea/sonarlint
+
+#PRODUCTION_DATA
+/app/prod/*
